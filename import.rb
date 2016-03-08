@@ -29,15 +29,27 @@ CSV.foreach('sales.csv', headers:true) do |row|
   end
 end
 
+product_contents = []
 CSV.foreach('sales.csv', headers:true) do |row|
   if !product_contents.include?(row['customer_and_account_no'])
     db_connection {|conn| conn.exec_params("INSERT INTO customer_acct_num (name_number) VALUES ($1)", [row['customer_and_account_no']] )}
   end
-  result = db_connection {|conn| conn.exec("SELECT name_number FROM product;")}
+  result = db_connection {|conn| conn.exec("SELECT name_number FROM customer_acct_num;")}
   result.each do |content|
-    product_contents << content['customer_and_account_no']
+    product_contents << content['name_number']
   end
 end
+# CSV.foreach('sales.csv', headers:true) do |row|
+#   # binding.pry
+#   if !product_contents.include?(row['customer_and_account_no'])
+#     db_connection {|conn| conn.exec_params("INSERT INTO customer_acct_num (name_number) VALUES ($1)", [row['customer_and_account_no']] )}
+#   end
+#   result = db_connection {|conn| conn.exec("SELECT name_number FROM customer_acct_num;")}
+#   result.each do |content|
+#     binding.pry
+#     product_contents << content['name_number']
+#   end
+# end
 
 CSV.foreach('sales.csv', headers:true) do |row|
   db_connection {|conn| conn.exec_params("INSERT INTO frequency (invoice_frequency) VALUES ($1)", [row['invoice_frequency']] )}
