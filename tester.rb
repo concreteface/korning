@@ -14,10 +14,12 @@ end
 
 result = db_connection {|conn| conn.exec("SELECT * FROM product WHERE product_name = 'Chimp Glass'")}
 
-# result.each do |res|
-#   puts res['id']
-# end
+
 puts result[0]['id']
+#{Finder.new(row["employee"], 'employee', 'name_email').find_id}
+#{Finder.new(row["customer_and_account_no"], 'customer_acct_num', 'name_number').find_id}
+#{Finder.new(row["product_name"], 'product', 'product_name').find_id}
+#{Finder.new(row["invoice_frequency"], 'frequency', 'invoice_frequency').find_id}
 
 
 
