@@ -11,15 +11,6 @@ class Finder
     @search_term = search_term
   end
 
-  def db_connection
-    begin
-      connection = PG.connect(dbname: "korning")
-      yield(connection)
-      ensure
-      connection.close
-    end
-  end
-
   def find_id
     @result = db_connection {|conn| conn.exec("SELECT * FROM #{table} WHERE #{column} = '#{search_term}'")}
       @result[0]['id']

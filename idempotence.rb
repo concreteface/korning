@@ -12,15 +12,6 @@ class Idempotentiator
     @contents = []
   end
 
-  def db_connection
-    begin
-      connection = PG.connect(dbname: "korning")
-      yield(connection)
-      ensure
-      connection.close
-    end
-  end
-
   def dbsearch
     result = db_connection {|conn| conn.exec("SELECT #{dbcolumn} FROM #{table}")}
     result.each do |res|
@@ -43,5 +34,3 @@ class Idempotentiator
     @included
   end
 end
-
-# puts Idempotentiator.new('product_name', 'product').find_term
