@@ -1,6 +1,5 @@
 require "pg"
 require 'csv'
-require 'pry'
 require_relative 'id_finder'
 require_relative 'csvtodb'
 
@@ -12,7 +11,6 @@ def db_connection
     connection.close
   end
 end
-
 
 CsvToDb.new('product_name', 'product', 'product_name').populate
 CsvToDb.new('customer_and_account_no', 'customer_acct_num', 'name_number').populate

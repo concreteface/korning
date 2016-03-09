@@ -37,22 +37,4 @@ class CsvToDb
       add_to_contents
     end
   end
-
 end
-
-
-
-
-
-
-
-# product_contents = []
-# CSV.foreach('sales.csv', headers:true) do |row|
-#   if !product_contents.include?(row['product_name'])
-#     db_connection {|conn| conn.exec_params("INSERT INTO product (product_name) VALUES ($1)", [row['product_name']] )}
-#   end
-#   result = db_connection {|conn| conn.exec("SELECT product_name FROM product;")}
-#   result.each do |content|
-#     product_contents << content['product_name']
-#   end
-# end
