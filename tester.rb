@@ -1,5 +1,6 @@
 require 'csv'
 require 'pg'
+require 'pry'
 
 def db_connection
   begin
@@ -19,8 +20,10 @@ end
 included = false
 CSV.read('sales.csv').each do |array|
   array.each do |data|
+binding.pry
   if data.include?("#{contents[0]}")
     included = true
+    return
   end
   end
 end

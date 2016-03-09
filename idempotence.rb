@@ -1,3 +1,7 @@
+require 'pg'
+require 'csv'
+require 'pry'
+
 class Idempotentiator
   attr_reader :dbcolumn, :included, :table, :contents
 
@@ -25,13 +29,19 @@ class Idempotentiator
   end
 
   def find_term
+    dbsearch
+    require 'pry'
     CSV.read('sales.csv').each do |array|
       array.each do |data|
-        if data.include?("#{@contents[0]}")
-          included = true
+        # binding.pry
+        if data.include?("#{@contents[0]}") && @contents[0] != nil
+          @included = true
+          break
         end
       end
     end
-    included
+    @included
   end
 end
+
+# puts Idempotentiator.new('product_name', 'product').find_term
