@@ -1,9 +1,9 @@
 
-DROP TABLE sales;
-DROP TABLE employee;
-DROP TABLE customer_acct_num;
-DROP TABLE product;
-DROP TABLE frequency;
+DROP TABLE IF EXISTS sales;
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS customer_acct_num;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS frequency;
 
 CREATE TABLE employee(
 id SERIAL PRIMARY KEY,
