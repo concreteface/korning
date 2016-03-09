@@ -29,7 +29,6 @@ class CsvToDb
   end
 
   def populate
-    @product_contents = []
     CSV.foreach('sales.csv', headers:true) do |row|
       if !@product_contents.include?(row["#{csvrow}"])
         db_connection {|conn| conn.exec_params("INSERT INTO #{table} (#{dbcolumn}) VALUES ($1)", [row["#{csvrow}"]] )}
